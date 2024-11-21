@@ -1,0 +1,42 @@
+{
+  "cli": {
+    "version": ">= 0.54.1"
+  },
+  "build": {
+    "development": {
+      "distribution": "internal",
+      "android": {
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "buildConfiguration": "Debug"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "gradleCommand": ":app:assembleRelease",
+        "buildType": "apk"
+      },
+      "env": {
+        "BACKEND_API_GUESTY_BASE": "api/guesty",
+        "BACKEND_API_CONTENTFUL_BASE": "api/contentful",
+        "BACKEND_API_TOAST_BASE": "api/toast",
+        "BACKEND_API_SPREEDLY_BASE": "api/spreedly",
+        "BACKEND_API_NEXUDUS_BASE": "api/nexudus"
+      }
+    },
+    "production": {
+      "env": {
+        "BACKEND_API_GUESTY_BASE": "api/guesty",
+        "BACKEND_API_CONTENTFUL_BASE": "api/contentful",
+        "BACKEND_API_TOAST_BASE": "api/toast",
+        "BACKEND_API_SPREEDLY_BASE": "api/spreedly",
+        "BACKEND_API_NEXUDUS_BASE": "api/nexudus"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

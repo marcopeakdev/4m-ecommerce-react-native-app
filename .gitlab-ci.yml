@@ -1,0 +1,58 @@
+image: node:latest
+
+include:
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/License-Scanning.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+
+cache:
+  paths:
+    - node_modules
+
+variables:
+  SECURE_LOG_LEVEL: 'debug'
+  SAST_EXCLUDED_PATHS: 'spec, test, tests, tmp, vendor, .yarn-cache, node_modules'
+  BACKEND_API_URL: $BACKEND_API_URL
+  BACKEND_API_TOKEN: $BACKEND_API_TOKEN
+  BACKEND_API_DEV_TOKEN: $BACKEND_API_DEV_TOKEN
+  BACKEND_API_CONTENTFUL_BASE: $BACKEND_API_CONTENTFUL_BASE
+  BACKEND_API_GUESTY_BASE: $BACKEND_API_GUESTY_BASE
+  BACKEND_API_SPREEDLY_BASE: $BACKEND_API_SPREEDLY_BASE
+  BACKEND_API_TOAST_BASE: $BACKEND_API_TOAST_BASE
+  NPM_TOKEN: $NPM_TOKEN
+semgrep-sast:
+  cache: {}
+
+stages:
+  - install
+  - test
+
+install:
+  stage: install
+  script:
+    - 'rm -rf node_modules/ yarn.lock'
+    - 'sh ./setup_npmrc.sh'
+    - 'yarn install'
+
+test:
+  stage: test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  dependencies:
+    - install
+  before_script:
+    - 'sh ./setup_env_test.sh'
+    - 'sh ./setup_npmrc.sh'
+  script:
+    - yarn test:ci
+  artifacts:
+    when: always
+    paths:
+      - gl-sast-report.json
+    reports:
+      sast: gl-sast-report.json
+      junit:
+        - junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: python_app/coverage.xml

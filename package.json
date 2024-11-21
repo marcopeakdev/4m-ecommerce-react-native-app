@@ -1,0 +1,124 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "start:web": "expo start --web",
+    "start": "expo start",
+    "lint": "npx eslint ./src/screens/**/*.js ./src/components/**/*.js",
+    "pre-commit": "lint-staged",
+    "commit": "cz",
+    "sonar-scan": "sonar-scanner",
+    "sonar-start": "docker run -d --name sonarqube -p 9000:9000 sonarqube",
+    "sonar-stop": "docker stop sonarqube",
+    "test": "jest",
+    "test:clearCache": "jest --clearCache",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watchAll",
+    "test:ci": "jest --config ./jest.config.js --collectCoverage --coverageDirectory=\"./coverage\" --ci --reporters=default --reporters=jest-junit --watchAll=false",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.7",
+    "@react-native-community/netinfo": "^9.3.0",
+    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/elements": "^1.2.1",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "@react-navigation/stack": "^6.0.11",
+    "@wearemoonello/4m-ui-theme": "0.1.25",
+    "amazon-cognito-identity-js": "^5.2.9",
+    "aws-amplify": "^4.3.27",
+    "axios": "^0.24.0",
+    "card-validator": "^8.1.1",
+    "dotenv": "^10.0.0",
+    "expo": "~43.0.0",
+    "expo-dev-client": "~0.6.3",
+    "expo-font": "~10.0.3",
+    "expo-linear-gradient": "~10.0.3",
+    "expo-splash-screen": "^0.13.4",
+    "expo-status-bar": "~1.1.0",
+    "expo-updates": "~0.10.5",
+    "fbjs-scripts": "^3.0.1",
+    "formik": "^2.2.9",
+    "md5": "^2.3.0",
+    "moment": "^2.29.3",
+    "native-base": "^3.2.1",
+    "package": "^1.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-native": "0.64.3",
+    "react-native-animatable": "^1.3.3",
+    "react-native-base64": "^0.2.1",
+    "react-native-credit-card-v2": "^1.1.3",
+    "react-native-device-info": "^8.4.5",
+    "react-native-dotenv": "^3.3.0",
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-get-random-values": "~1.7.0",
+    "react-native-image-header-scroll-view": "^0.10.3",
+    "react-native-image-slider": "^2.0.3",
+    "react-native-image-slider-box": "^2.0.2",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-maps": "0.28.1",
+    "react-native-reanimated": "~2.2.0",
+    "react-native-render-html": "^6.3.4",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.8.0",
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-svg": "12.1.1",
+    "react-native-web": "0.17.1",
+    "rebass": "^4.0.7",
+    "styled-components": "^5.3.3",
+    "styled-system": "^5.1.5",
+    "uuid": "^8.3.2",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.0",
+    "jest": "~26.6.3",
+    "jest-expo": "~41.0.0",
+    "jest-fetch-mock": "~3.0.3",
+    "jest-junit": "^13.0.0",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "react-test-renderer": "^17.0.2"
+  },
+  "private": true,
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "_pre-push": "lint-staged && yarn test",
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "./src/components/**/*.js, ./src/screens/**/*.js": "eslint --fix"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "version": "0.0.0",
+  "name": "4m-ecommerce-app"
+}

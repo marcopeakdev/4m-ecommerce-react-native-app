@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "4m Life",
+    "slug": "consolidated-brands-4m",
+    "owner": "moonello",
+    "version": "11.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/4m-app-icon.png",
+    "splash": {
+      "image": "./assets/pizza.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#1f1f1f"
+    },
+    "userInterfaceStyle": "automatic",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "buildNumber": "11.0.0",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.consolidatedbrands4m.ecommerceapp"
+    },
+    "android": {
+      "package": "com.consolidatedbrands4m.ecommerceapp",
+      "versionCode": 11,
+      "softwareKeyboardLayoutMode": "pan",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/4m-app-icon.png",
+        "backgroundColor": "#1F1F1F"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
